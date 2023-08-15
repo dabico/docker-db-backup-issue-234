@@ -7,6 +7,7 @@ services:
     restart: "always"
     volumes:
       - data:/var/lib/mysql
+      - ./classicmodels.sql:/docker-entrypoint-initdb.d/00_init.sql
     environment:
       MYSQL_USER: admin
       MYSQL_PASSWORD: 9ijn8uhb
