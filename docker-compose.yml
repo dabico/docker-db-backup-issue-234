@@ -8,9 +8,10 @@ services:
     volumes:
       - data:/var/lib/mysql
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: yes
-      MYSQL_DATABASE: example
       MYSQL_USER: admin
+      MYSQL_PASSWORD: 9ijn8uhb
+      MYSQL_DATABASE: example
+      MYSQL_ALLOW_EMPTY_PASSWORD: yes
       TZ: UTC
     healthcheck:
       test: mysqladmin ping -h localhost
