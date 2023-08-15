@@ -1,0 +1,50 @@
+version: '3.9'
+
+services:
+  database:
+    container_name: example-database
+    image: mysql:8.0.33
+    restart: "always"
+    volumes:
+      - data:/var/lib/mysql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: yes
+      MYSQL_DATABASE: example
+      MYSQL_USER: admin
+      TZ: UTC
+    healthcheck:
+      test: mysqladmin ping -h localhost
+      start_period: 10s
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backup:
+    container_name: example-backup
+    image: tiredofit/db-backup:3.9.6
+    restart: "always"
+    volumes:
+      - backup:/backup
+    environment:
+      TZ: UTC
+      TIMEZONE: Etc/UTC
+      DB_TYPE: mysql
+      DB_HOST: example-database
+      DB_NAME: example
+      DB_USER: admin
+      DB_DUMP_BEGIN: "+0"
+      DB_DUMP_FREQ: "1440"
+      DB_CLEANUP_TIME: "10080"
+      SPLIT_DB: FALSE
+      CHECKSUM: SHA1
+      COMPRESSION: GZ
+      CONTAINER_ENABLE_MONITORING: FALSE
+      DEBUG_MODE: FALSE
+    links:
+      - example-database
+
+volumes:
+  data:
+    name: example-data
+  backup:
+    name: example-data-backup
