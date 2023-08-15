@@ -48,3 +48,7 @@ volumes:
     name: example-data
   backup:
     name: example-data-backup
+
+networks:
+  default:
+    name: example-network
