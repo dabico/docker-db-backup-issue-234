@@ -43,6 +43,7 @@ services:
       COMPRESSION: GZ
       CONTAINER_ENABLE_MONITORING: FALSE
       DEBUG_MODE: FALSE
+      EXTRA_OPTS: "--ignore-table=db_name.employees"
     links:
       - database
     depends_on:
