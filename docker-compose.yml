@@ -41,7 +41,7 @@ services:
       CONTAINER_ENABLE_MONITORING: FALSE
       DEBUG_MODE: FALSE
     links:
-      - example-database
+      - database
 
 volumes:
   data:
